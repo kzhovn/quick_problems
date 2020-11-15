@@ -17,17 +17,23 @@ import sys
 #
 
 def countingValleys(steps, path):
-    # Write your code here
+    level = 0
+    level_old = 0
+    valleys = 0
+    path = list(path)
 
-if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    for i in range(steps):
+        level_old = level
 
-    steps = int(input().strip())
+        if path[i] == 'U':
+            level += 1
+        elif path[i] == 'D':
+            level -= 1
 
-    path = input()
+        if level == 0 and level_old < 0:
+            valleys += 1
 
-    result = countingValleys(steps, path)
+    return valleys
 
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
+print(countingValleys(2, "UD"))
+print(countingValleys(8, "UDDDUDUU"))

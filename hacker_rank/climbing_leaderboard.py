@@ -4,18 +4,18 @@ def climbingLeaderboard(ranked, player_scores):
     ranked_unique = list(dict.fromkeys(ranked)) #https://stackoverflow.com/questions/7961363/removing-duplicates-in-the-lists
     
     player_ranks = []
+    iter_start = len(ranked_unique) - 1
 
     for score in player_scores:
 
-        if score < ranked[-1]: #if score is less than lowest score on the leaderboard
-            player_ranks.append(len(ranked_unique) + 1)
+        if score >= ranked_unique[0]: #if score is greater than or equal to winning score
+            player_ranks.append(1)
         else:
-            for i in range(len(ranked_unique)):
-                if score >= ranked_unique[i]:
-                    player_ranks.append(i + 1)
+            for i in range(iter_start, -1, -1):
+                if score < ranked_unique[i]:
+                    player_ranks.append(i + 2)
+                    iter_start = i
                     break
-
-    
     
     return player_ranks
 
